@@ -34,8 +34,4 @@ Bu proje ile ilgili sorularınız veya iş birliği talepleriniz için aşağıd
 *   İsim: Orkun Eryılmaz
 *   E-posta: orkunerylmz@gmail.com
 *   LinkedIn: www.linkedin.com/in/orkunerylmz
-*   GitHub: github.com/orkuneryilmaz
-
----
-
-Orkun Eryılmaz tarafından geliştirilmiştir.
+*   GitHub: github.com/orkunerylmz
