@@ -1,34 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ReChat - Modern WhatsApp Sohbet Görüntüleyici ve PDF Aracı
 
-## Getting Started
+ReChat, WhatsApp'tan dışa aktarılan .txt formatındaki sohbet dosyalarını, orijinal WhatsApp Web arayüzü kalitesinde görüntülemenizi ve tek tıkla profesyonel PDF dosyalarına dönüştürmenizi sağlayan bir web uygulamasıdır.
 
-First, run the development server:
+![ReChat Dashboard](pics/pics1.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Proje Hakkında
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ReChat, dijital anılarını saklamak, hukuksal süreçler için kayıt tutmak veya sadece sohbetlerini daha okunaklı bir formatta arşivlemek isteyen kullanıcılar için tasarlanmıştır. Karmaşık .txt dosyalarını alır ve onları saniyeler içinde şık, okunabilir ve paylaşılabilir bir hale getirir.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+![Karanlık Tema ve Arama](pics/pics2.png)
 
-## Learn More
+## Öne Çıkan Özellikler
 
-To learn more about Next.js, take a look at the following resources:
+*   Premium Görünüm: Orijinal WhatsApp tasarımına sadık, akıcı ve modern bir kullanıcı deneyimi.
+*   Kesintisiz PDF Dışa Aktarma: Sohbetleri sayfalarca bölmek yerine, tek bir uzun ve yüksek çözünürlüklü sayfa halinde PDF olarak kaydeder.
+*   Gizlilik ve İsim Değiştirme: İndirme yapmadan önce katılımcı isimlerini değiştirebilir, sohbeti anonim hale getirebilirsiniz.
+*   Tema Desteği: Göz yormayan Karanlık (Dark), Aydınlık (Light) ve tam siyah AMOLED modları mevcuttur.
+*   Akıllı Filtreleme: On binlerce mesaj içinden anlık arama yapabilir, belirli kişilerin mesajlarına odaklanabilirsiniz.
+*   İstatistikler: Sohbetteki toplam mesaj sayısı, aktif gün sayısı ve katılımcı bazlı mesaj dağılımı gibi verileri anlık görün.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Mobil Uyumluluk](pics/pics3.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Güvenlik ve Gizlilik
 
-## Deploy on Vercel
+ReChat tamamen istemci tarafında (client-side) çalışır. Yüklediğiniz hiçbir sohbet dosyası veya girdiğiniz isimler bir sunucuya gönderilmez, depolanmaz veya işlenmez. Tüm işlemler doğrudan tarayıcınızda gerçekleşir; bu sayede en mahrem sohbetleriniz bile tamamen size özel kalır.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## İletişim
+
+Bu proje ile ilgili sorularınız veya iş birliği talepleriniz için aşağıdaki kanallardan ulaşabilirsiniz:
+
+*   İsim: Orkun Eryılmaz
+*   E-posta: orkunerylmz@gmail.com
+*   LinkedIn: www.linkedin.com/in/orkunerylmz
+*   GitHub: github.com/orkuneryilmaz
+
+---
+
+Orkun Eryılmaz tarafından geliştirilmiştir.
