@@ -21,6 +21,7 @@ export default function Sidebar({
   onNameChange,
   onExportPDF,
   onReset,
+  onFileLoaded,
   pdfLoading,
   fileName,
   searchQuery,
@@ -31,6 +32,8 @@ export default function Sidebar({
   setTheme,
   isOpen,
   setIsOpen,
+  customTitle,
+  setCustomTitle,
 }) {
   const colorMap = useMemo(() => {
     const map = {};
@@ -68,19 +71,18 @@ export default function Sidebar({
           </div>
         </div>
 
-        {/* Search */}
-        <div className="search-container">
-          <div className="search-input-wrapper">
-            <svg className="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Mesajlarda ara..."
-              value={searchQuery}
-              onChange={(e) => onSearchChange(e.target.value)}
-              id="search-input"
-            />
-          </div>
+
+        {/* Chat Title Editor */}
+        <div className="sidebar-section">
+          <h3 className="sidebar-section-title">Sohbet Başlığı</h3>
+          <input
+            className="name-editor-input"
+            style={{ width: "100%" }}
+            value={customTitle}
+            onChange={(e) => setCustomTitle(e.target.value)}
+            placeholder="Sohbet başlığı girin..."
+            id="chat-title-input"
+          />
         </div>
 
         {/* Main User Selector */}
@@ -133,7 +135,7 @@ export default function Sidebar({
                   className="name-color-dot"
                   style={{ background: colorMap[p] }}
                 />
-                {p}
+                {nameMap[p] || p}
               </div>
             ))}
           </div>
@@ -162,26 +164,6 @@ export default function Sidebar({
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="sidebar-actions">
-          <button
-            className="btn btn-primary"
-            onClick={onExportPDF}
-            disabled={pdfLoading}
-            id="export-pdf-btn"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
-            {pdfLoading ? "PDF Oluşturuluyor..." : "PDF Olarak İndir"}
-          </button>
-          <button
-            className="btn btn-danger"
-            onClick={onReset}
-            id="reset-btn"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}><polyline points="1 4 1 10 7 10" /><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" /></svg>
-            Yeni Dosya Yükle
-          </button>
-        </div>
       </aside>
     </>
   );

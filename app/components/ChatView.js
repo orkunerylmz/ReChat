@@ -14,6 +14,7 @@ export default function ChatView({
   theme,
   setTheme,
   onOpenSidebar,
+  customTitle,
 }) {
   const scrollRef = useRef(null);
 
@@ -50,11 +51,7 @@ export default function ChatView({
     if (searchQuery?.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter((m) => {
-        const displayName = getDisplayName(m.sender);
-        return (
-          m.text.toLowerCase().includes(q) ||
-          displayName.toLowerCase().includes(q)
-        );
+        return m.text.toLowerCase().includes(q);
       });
     }
     return result;
@@ -92,6 +89,24 @@ export default function ChatView({
     return groups;
   }, [filteredMessages, nameMap, participants]);
 
+  // Highlight search term helper
+  const highlightText = (text, query) => {
+    if (!query || !query.trim()) return text;
+    
+    const parts = text.split(new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'));
+    return (
+      <>
+        {parts.map((part, i) => 
+          part.toLowerCase() === query.toLowerCase() ? (
+            <mark key={i} className="search-highlight">{part}</mark>
+          ) : (
+            part
+          )
+        )}
+      </>
+    );
+  };
+
   // Auto-scroll to bottom on initial load
   useEffect(() => {
     if (scrollRef.current) {
@@ -100,7 +115,8 @@ export default function ChatView({
   }, []);
 
   // Chat header info
-  const chatTitle = uniqueMappedParticipants.join(", ");
+  const defaultTitle = uniqueMappedParticipants.join(", ");
+  const chatTitleText = customTitle && customTitle.trim() !== "" ? customTitle : defaultTitle;
 
   return (
     <div className="chat-area">
@@ -116,18 +132,15 @@ export default function ChatView({
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
           </button>
 
-          <div className="chat-header-avatar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
-          </div>
           <div className="chat-header-info">
-            <div className="chat-header-name">{chatTitle}</div>
+            <div className="chat-header-name">{chatTitleText}</div>
             <div className="chat-header-status">
               {filteredMessages.filter((m) => !m.isSystem).length} mesaj
               {searchQuery ? " (filtrelenmiş)" : ""}
             </div>
           </div>
         </div>
-
+        
         {/* Theme Toggle */}
         <button
           className="theme-toggle-btn"
@@ -140,6 +153,7 @@ export default function ChatView({
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
           )}
         </button>
+
       </div>
 
       {/* Messages */}
@@ -185,7 +199,7 @@ export default function ChatView({
                       </span>
                     )}
                     <span className="message-text system-text">
-                      {item.text}
+                      {highlightText(item.text, searchQuery)}
                     </span>
                     <div className="message-meta">
                       <span className="message-time">
@@ -223,7 +237,7 @@ export default function ChatView({
                       {item.mappedSender}
                     </span>
                   )}
-                  <span className="message-text">{item.text}</span>
+                  <span className="message-text">{highlightText(item.text, searchQuery)}</span>
                   <div className="message-meta">
                     <span className="message-time">
                       {item.time.slice(0, 5)}

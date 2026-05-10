@@ -6,6 +6,7 @@ import { exportToPDF } from "./lib/pdfExport";
 import UploadScreen from "./components/UploadScreen";
 import Sidebar from "./components/Sidebar";
 import ChatView from "./components/ChatView";
+import BottomNavbar from "./components/BottomNavbar";
 
 // Helper function to capitalize each word of a name properly (handling Turkish characters)
 const capitalizeWords = (str) => {
@@ -29,6 +30,7 @@ export default function Home() {
   const [mainUser, setMainUser] = useState(null);
   const [theme, setTheme] = useState("dark");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [customTitle, setCustomTitle] = useState("");
 
   const chatRef = useRef(null);
 
@@ -46,6 +48,7 @@ export default function Home() {
     setNameMap(initialNameMap);
     setMainUser(parsed.participants[0] || null);
     setSearchQuery("");
+    setCustomTitle("");
   }, []);
 
   // Handle name change with auto-capitalization
@@ -82,6 +85,7 @@ export default function Home() {
     setFileName("");
     setSearchQuery("");
     setMainUser(null);
+    setCustomTitle("");
   }, []);
 
   // Upload screen
@@ -91,8 +95,8 @@ export default function Home() {
 
   // Main chat view
   return (
-    <>
-      <div className="app-container" data-theme={theme}>
+    <div className="app-wrapper" data-theme={theme}>
+      <div className="app-container">
         <Sidebar
           messages={chatData.messages}
           participants={chatData.participants}
@@ -100,6 +104,7 @@ export default function Home() {
           onNameChange={handleNameChange}
           onExportPDF={handleExportPDF}
           onReset={handleReset}
+          onFileLoaded={handleFileLoaded}
           pdfLoading={pdfLoading}
           fileName={fileName}
           searchQuery={searchQuery}
@@ -110,6 +115,8 @@ export default function Home() {
           setTheme={setTheme}
           isOpen={sidebarOpen}
           setIsOpen={setSidebarOpen}
+          customTitle={customTitle}
+          setCustomTitle={setCustomTitle}
         />
         <ChatView
           messages={chatData.messages}
@@ -121,8 +128,20 @@ export default function Home() {
           theme={theme}
           setTheme={setTheme}
           onOpenSidebar={() => setSidebarOpen(prev => !prev)}
+          customTitle={customTitle}
         />
       </div>
+
+      <BottomNavbar
+        onReset={handleReset}
+        theme={theme}
+        setTheme={setTheme}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        onExportPDF={handleExportPDF}
+        onFileLoaded={handleFileLoaded}
+        pdfLoading={pdfLoading}
+      />
 
       {/* PDF Progress Overlay */}
       {pdfLoading && (
@@ -139,6 +158,6 @@ export default function Home() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
